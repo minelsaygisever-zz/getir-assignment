@@ -4,7 +4,7 @@ const router = express.Router()
 const Record = require('../models/record')
 var assert = require('assert')
 var url = 'mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getircase-study?retryWrites=true'
-
+/*
 router.get('/', function (req, res, next){
     mongo.connect(url, function(err, db) {
         assert.equal(null, err)
@@ -17,7 +17,7 @@ router.get('/', function (req, res, next){
             res.json({code: '0', msg: 'Success', cursor })
         });
     })
-})
+})*/
 
 
 router.post('/', async (req, res) => {
