@@ -1,5 +1,6 @@
-
-POST http://localhost:3000/route
+GET http://localhost:3000/
+###
+POST http://localhost:3000/
 Content-Type: application/json
 
 {
@@ -11,7 +12,7 @@ Content-Type: application/json
 }
 ###
 
-POST http://localhost:3000/route/new
+POST http://localhost:3000/new
 Content-Type: application/json
 
 {

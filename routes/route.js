@@ -1,6 +1,24 @@
 const express = require('express')
+const { mongo } = require('mongoose')
 const router = express.Router()
 const Record = require('../models/record')
+var assert = require('assert')
+var url = 'mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getircase-study?retryWrites=true'
+
+router.get('/', function (req, res, next){
+    mongo.connect(url, function(err, db) {
+        assert.equal(null, err)
+        var cursor = db.collection('records').find()
+        cursor.forEach(function(doc, err) {
+            assert.equal(null, err)
+            resultArray.push(doc)
+        }, function(){
+            db.close
+            res.json({code: '0', msg: 'Success', cursor })
+        });
+    })
+})
+
 
 router.post('/', async (req, res) => {
     try {

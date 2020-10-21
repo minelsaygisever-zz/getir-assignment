@@ -1,8 +1,11 @@
 require('dotenv').config()
 
+
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+
+app.use(express.static('public'))
 
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
@@ -15,6 +18,6 @@ db.once('open', () => console.log('Connceted to Database'))
 app.use(express.json())
 
 const routeFor = require('./routes/route')
-app.use('/route', routeFor)
+app.use('/', routeFor)
 
-app.listen(3000, () => console.log('Server Started'))
+app.listen(process.env.PORT || 3000)
