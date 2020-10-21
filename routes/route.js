@@ -19,6 +19,15 @@ router.get('/', function (req, res, next){
     })
 })*/
 
+router.get('/', async (req, res) => {
+    try {
+        const records = await Record.find({})
+        res.json({code: '0', msg: 'Success', records })
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
+})
+
 
 router.post('/', async (req, res) => {
     try {
