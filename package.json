@@ -10,13 +10,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
-    "mongoose": "^5.10.9"
+    "mocha": "^8.2.0",
+    "mockgoose": "^8.0.4",
+    "mongoose": "^5.10.9",
+    "supertest": "^5.0.0"
   },
   "devDependencies": {
+    "chai-http": "^4.3.0",
+    "jest": "^26.6.0",
     "nodemon": "^2.0.6"
   }
 }

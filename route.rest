@@ -1,21 +1,20 @@
-GET http://localhost:3000/
-###
 POST http://localhost:3000/
 Content-Type: application/json
 
 {
     "startDate": "2016-01-25",
-    "endDate": "2016-01-25",
+    "endDate": "2019-01-25",
     "minCount": 2700,
-    "maxCount": 2800
+    "maxCount": 4500
     
 }
+
 ###
 
 POST http://localhost:3000/new
 Content-Type: application/json
 
 {
-    "createdAt": "2016-01-25",
-    "totalCount": 2800
+    "createdAt": "2018-01-02",
+    "totalCount": 2750
 }

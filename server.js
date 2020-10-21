@@ -21,3 +21,5 @@ const routeFor = require('./routes/route')
 app.use('/', routeFor)
 
 app.listen(process.env.PORT || 3000)
+
+module.exports = app

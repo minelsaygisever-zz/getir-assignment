@@ -3,35 +3,12 @@ const { mongo } = require('mongoose')
 const router = express.Router()
 const Record = require('../models/record')
 var assert = require('assert')
-var url = 'mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getircase-study?retryWrites=true'
-/*
-router.get('/', function (req, res, next){
-    mongo.connect(url, function(err, db) {
-        assert.equal(null, err)
-        var cursor = db.collection('records').find()
-        cursor.forEach(function(doc, err) {
-            assert.equal(null, err)
-            resultArray.push(doc)
-        }, function(){
-            db.close
-            res.json({code: '0', msg: 'Success', cursor })
-        });
-    })
-})*/
 
-router.get('/', async (req, res) => {
-    try {
-        const records = await Record.find({})
-        res.json({code: '0', msg: 'Success', records })
-    } catch (err) {
-        res.status(500).json({ message: err.message })
-    }
-})
-
-
+//get filtered record
 router.post('/', async (req, res) => {
     try {
         const records = await Record.find({
+            //filtering
             $and: [
                 {createdAt: { $gte: req.body.startDate}},
                 {createdAt: { $lte: req.body.endDate}},
@@ -41,17 +18,16 @@ router.post('/', async (req, res) => {
         })
         res.json({code: '0', msg: 'Success', records })
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ code:'1', message: err.message })
     }
 })
 
-
+//post record
 router.post('/new', async (req, res) => {
     const record = new Record({
         totalCount: req.body.totalCount,
         createdAt: req.body.createdAt
     })
-    
     try {
         const newRecord = await record.save()
         res.status(201).json({ code: '0', msg: 'Success', newRecord})
