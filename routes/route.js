@@ -1,38 +1,35 @@
 const express = require('express')
-const { mongo } = require('mongoose')
 const router = express.Router()
 const Record = require('../models/record')
-var assert = require('assert')
 
-//get filtered record
 router.post('/', async (req, res) => {
     try {
-        const records = await Record.find({
-            //filtering
-            $and: [
-                {createdAt: { $gte: req.body.startDate}},
-                {createdAt: { $lte: req.body.endDate}},
-                {totalCount: { $gte: req.body.minCount}},
-                {totalCount: { $lte: req.body.maxCount}}
-            ]
-        })
-        res.json({code: '0', msg: 'Success', records })
+        const records = []; // output
+        const allRecords = await Record.find({}) // get all records
+        allRecords.forEach(element => {
+            
+            totalCount = 0 // add every counts element value to this variable
+            
+            // variable declaration for comparison and output
+            key = element.key
+            createdAt = element.createdAt
+            startDate = new Date(req.body.startDate)
+            endDate = new Date(req.body.endDate)
+            
+            // add every counts element to totalCount
+            element.counts.forEach(element => {
+                totalCount += element
+            })
+            
+            // comparisons
+            if(totalCount <= req.body.maxCount && totalCount >= req.body.minCount 
+            && createdAt >= startDate && createdAt <= endDate) {
+                records.push({key, createdAt, totalCount})
+            }
+        });
+        res.json({code: 0, msg: 'Success', records })
     } catch (err) {
         res.status(500).json({ code:'1', message: err.message })
-    }
-})
-
-//post record
-router.post('/new', async (req, res) => {
-    const record = new Record({
-        totalCount: req.body.totalCount,
-        createdAt: req.body.createdAt
-    })
-    try {
-        const newRecord = await record.save()
-        res.status(201).json({ code: '0', msg: 'Success', newRecord})
-    } catch (err) {
-        res.status(400).json({ message: err.json})
     }
 })
 

@@ -1,15 +1,18 @@
 const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
-    createdAt: {
-        type: Date,
-        required: true,
-        default: Date.now
+    counts: {
+        type: [Number]
     },
-    totalCount: {
-        type: Number,
-        required: true
-    }
+    createdAt: {
+        type: Date
+    },
+    key: {
+        type: String
+    },
+    value: {
+        type: String
+    },
 })
 
 module.exports = mongoose.model('Record', schema)
